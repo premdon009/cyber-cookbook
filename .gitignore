@@ -1,6 +1,6 @@
 .venv/
 site/
-resources/
+/resources/
 __pycache__/
 *.pyc
 .cache/
