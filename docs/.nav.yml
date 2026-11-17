@@ -1,0 +1,19 @@
+nav:
+  - Home: index.md
+  - Start here:
+      - roadmap.md
+      - how-to-use.md
+      - ethics-and-legal.md
+  - Home lab: lab
+  - Foundations: 00-foundations
+  - Linux: 10-linux
+  - Windows & AD: 20-windows
+  - Red team: 30-red-team
+  - Blue team: 40-blue-team
+  - Purple team: 50-purple-team
+  - Cloud & containers: 60-cloud-containers
+  - Specialties: 70-specialties
+  - AI: 80-ai
+  - Case studies: 90-case-studies
+  - Resources: resources
+  - Templates: note-templates

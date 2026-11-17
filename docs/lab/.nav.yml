@@ -1,0 +1,6 @@
+nav:
+  - index.md
+  - hypervisor-and-network.md
+  - siem-stack.md
+  - web-and-cve-targets.md
+  - ad-lab.md

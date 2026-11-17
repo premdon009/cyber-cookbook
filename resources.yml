@@ -1,0 +1,1268 @@
+# Single source of truth for every external resource in the cookbook.
+# scripts/gen_catalog.py renders docs/resources/*.md from this file,
+# scripts/fetch_resources.py clones entries with clone: true into resources/ (git-ignored),
+# scripts/check_links.py verifies every url.
+#
+# Fields
+#   name      display name
+#   url       where to read / use it
+#   repo      git URL (optional) - required when clone: true
+#   category  one of the keys in `categories` below
+#   level     L0..L5 (lowest level it is useful at)
+#   cost      free | freemium | self-hosted
+#   platform  linux | windows | both | web | cloud | any
+#   team      red | blue | purple | both | ai
+#   clone     true -> fetch_resources.py clones it for offline reading
+#   note      one line: why / when to use it
+
+categories:
+  reference: Reference & reading
+  courses: Free courses & books
+  awesome: Awesome lists & link hubs
+  online-labs: Free online labs & wargames
+  self-hosted-labs: Self-hosted vulnerable labs
+  blue-tooling: Blue team tooling (open source)
+  datasets: Logs, datasets & detection content
+  re-exploit: Reverse engineering & binary exploitation
+  ai: AI - learning, building, securing
+  case-sources: Vulnerability & incident sources
+
+resources:
+  # ---------------------------------------------------------------- reference
+  - name: HackTricks
+    url: https://hacktricks.wiki/
+    repo: https://github.com/HackTricks-wiki/hacktricks
+    category: reference
+    level: L2
+    cost: free
+    platform: both
+    team: red
+    clone: true
+    note: Huge pentest methodology wiki; Linux/Windows privesc, AD, web, services by port.
+  - name: PayloadsAllTheThings
+    url: https://swisskyrepo.github.io/PayloadsAllTheThings/
+    repo: https://github.com/swisskyrepo/PayloadsAllTheThings
+    category: reference
+    level: L2
+    cost: free
+    platform: web
+    team: red
+    clone: true
+    note: Per-vulnerability-class payload and bypass references (web, AD, cloud).
+  - name: The Hacker Recipes
+    url: https://www.thehacker.recipes/
+    repo: https://github.com/The-Hacker-Recipes/The-Hacker-Recipes
+    category: reference
+    level: L3
+    cost: free
+    platform: windows
+    team: red
+    clone: true
+    note: Best structured AD / Kerberos / NTLM attack reference.
+  - name: ired.team - Red Teaming Tactics and Techniques
+    url: https://www.ired.team/
+    repo: https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques
+    category: reference
+    level: L3
+    cost: free
+    platform: windows
+    team: red
+    clone: true
+    note: Lab-style notes on Windows internals, AD abuse, code injection, mapped to ATT&CK.
+  - name: GTFOBins
+    url: https://gtfobins.org/
+    repo: https://github.com/GTFOBins/GTFOBins.github.io
+    category: reference
+    level: L2
+    cost: free
+    platform: linux
+    team: both
+    clone: false
+    note: Unix binaries that can bypass local restrictions (sudo, SUID, capabilities).
+  - name: LOLBAS
+    url: https://lolbas-project.github.io/
+    repo: https://github.com/LOLBAS-Project/LOLBAS
+    category: reference
+    level: L2
+    cost: free
+    platform: windows
+    team: both
+    clone: false
+    note: Living-off-the-land Windows binaries, scripts and libraries, with detection notes.
+  - name: OWASP Cheat Sheet Series
+    url: https://cheatsheetseries.owasp.org/
+    repo: https://github.com/OWASP/CheatSheetSeries
+    category: reference
+    level: L1
+    cost: free
+    platform: web
+    team: blue
+    clone: true
+    note: Concise secure-design and defence cheat sheets for developers and defenders.
+  - name: OWASP Web Security Testing Guide
+    url: https://owasp.org/projects/web-security-testing-guide
+    repo: https://github.com/OWASP/wstg
+    category: reference
+    level: L2
+    cost: free
+    platform: web
+    team: red
+    clone: true
+    note: The standard web app testing methodology.
+  - name: OWASP Top 10
+    url: https://owasp.org/projects/top-ten
+    category: reference
+    level: L1
+    cost: free
+    platform: web
+    team: both
+    clone: false
+    note: The most critical web application risk categories.
+  - name: MITRE ATT&CK
+    url: https://attack.mitre.org/
+    category: reference
+    level: L1
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Adversary tactics and techniques knowledge base; the shared language of red and blue.
+  - name: MITRE D3FEND
+    url: https://d3fend.mitre.org/
+    category: reference
+    level: L3
+    cost: free
+    platform: any
+    team: blue
+    clone: false
+    note: Defensive countermeasure knowledge graph mapped against ATT&CK.
+  - name: ATT&CK Navigator
+    url: https://mitre-attack.github.io/attack-navigator/
+    category: reference
+    level: L3
+    cost: free
+    platform: any
+    team: purple
+    clone: false
+    note: Build coverage heatmaps of techniques you can detect or emulate.
+  - name: Orange Cyberdefense mindmaps (AD, ...)
+    url: https://orange-cyberdefense.github.io/ocd-mindmaps/
+    repo: https://github.com/Orange-Cyberdefense/ocd-mindmaps
+    category: reference
+    level: L3
+    cost: free
+    platform: windows
+    team: red
+    clone: false
+    note: The well-known AD pentest mindmap; great for planning attack paths in a lab.
+  - name: Infosec_Reference
+    url: https://github.com/rmusser01/Infosec_Reference
+    repo: https://github.com/rmusser01/Infosec_Reference
+    category: reference
+    level: L2
+    cost: free
+    platform: any
+    team: both
+    clone: true
+    note: Enormous categorised reference of papers, talks and tools.
+  - name: Security engineering notes (gracenolan)
+    url: https://github.com/gracenolan/Notes
+    repo: https://github.com/gracenolan/Notes
+    category: reference
+    level: L2
+    cost: free
+    platform: any
+    team: both
+    clone: true
+    note: Compact study guide covering networking, OS, web, detection and IR fundamentals.
+  - name: Ultimate Windows Security - Event ID encyclopedia
+    url: https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/
+    category: reference
+    level: L2
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Look up what any Windows Security event ID means and which fields matter.
+  - name: Microsoft Learn - Security documentation
+    url: https://learn.microsoft.com/en-us/security/
+    category: reference
+    level: L1
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Official Windows, Entra ID, Defender and AD hardening docs.
+  - name: Sysinternals
+    url: https://learn.microsoft.com/en-us/sysinternals/
+    category: reference
+    level: L1
+    cost: free
+    platform: windows
+    team: both
+    clone: false
+    note: Process Explorer, Autoruns, Procmon, Sysmon - essential Windows inspection tools.
+  - name: SANS posters & cheat sheets
+    url: https://www.sans.org/posters/
+    category: reference
+    level: L2
+    cost: free
+    platform: both
+    team: blue
+    clone: false
+    note: Hunt Evil, Windows forensic analysis and other free posters (email sign-in may be asked).
+  - name: CIS Benchmarks
+    url: https://www.cisecurity.org/cis-benchmarks
+    category: reference
+    level: L2
+    cost: free
+    platform: both
+    team: blue
+    clone: false
+    note: Hardening baselines for Linux distros, Windows, cloud; PDFs free after a form.
+  - name: Arch Wiki - Security
+    url: https://wiki.archlinux.org/title/Security
+    category: reference
+    level: L1
+    cost: free
+    platform: linux
+    team: blue
+    clone: false
+    note: Excellent, distro-agnostic Linux hardening reference.
+
+  # ------------------------------------------------------------------ courses
+  - name: The Linux Command Line (free book)
+    url: https://linuxcommand.org/tlcl.php
+    category: courses
+    level: L0
+    cost: free
+    platform: linux
+    team: both
+    clone: false
+    note: Full free book from shell basics to scripting.
+  - name: Linux Journey
+    url: https://labex.io/linuxjourney
+    category: courses
+    level: L0
+    cost: free
+    platform: linux
+    team: both
+    clone: false
+    note: Short, friendly lessons on Linux internals; now hosted by LabEx, still free with no sign-up.
+  - name: OpenSecurityTraining2
+    url: https://ost2.fyi/
+    category: courses
+    level: L2
+    cost: free
+    platform: both
+    team: both
+    clone: false
+    note: Free deep courses - x86-64 assembly, Windows internals, firmware, RE, exploitation.
+  - name: Professor Messer - CompTIA Security+ videos
+    url: https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-comptia-security-plus-course/
+    category: courses
+    level: L1
+    cost: free
+    platform: any
+    team: blue
+    clone: false
+    note: Free full Security+ video course; a good breadth checklist even without the cert.
+  - name: Roppers Academy
+    url: https://www.roppers.org/
+    category: courses
+    level: L0
+    cost: free
+    platform: both
+    team: both
+    clone: false
+    note: Free self-paced fundamentals, CTF and networking courses.
+  - name: Cisco Networking Academy - free courses
+    url: https://www.netacad.com/
+    category: courses
+    level: L0
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Free intro networking and cybersecurity courses (account required).
+  - name: Microsoft Learn - PowerShell
+    url: https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/00-introduction
+    category: courses
+    level: L0
+    cost: free
+    platform: windows
+    team: both
+    clone: false
+    note: Official PowerShell 101 learning path.
+  - name: Automate the Boring Stuff with Python
+    url: https://automatetheboringstuff.com/
+    category: courses
+    level: L0
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Free online Python book; the scripting base for both red and blue work.
+  - name: Practical Networking
+    url: https://www.practicalnetworking.net/
+    category: courses
+    level: L0
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Clear free explanations of packet flow, subnetting, ARP, routing.
+
+  # ------------------------------------------------------------------ awesome
+  - name: awesome-pentest
+    url: https://github.com/enaqx/awesome-pentest
+    repo: https://github.com/enaqx/awesome-pentest
+    category: awesome
+    level: L2
+    cost: free
+    platform: any
+    team: red
+    clone: true
+    note: Pentest tools, books, labs.
+  - name: awesome-security
+    url: https://github.com/sbilly/awesome-security
+    repo: https://github.com/sbilly/awesome-security
+    category: awesome
+    level: L1
+    cost: free
+    platform: any
+    team: both
+    clone: true
+    note: Broad security software and resource list.
+  - name: Awesome-Red-Teaming
+    url: https://github.com/yeyintminthuhtut/Awesome-Red-Teaming
+    repo: https://github.com/yeyintminthuhtut/Awesome-Red-Teaming
+    category: awesome
+    level: L3
+    cost: free
+    platform: any
+    team: red
+    clone: true
+    note: Red team techniques and write-ups by ATT&CK phase.
+  - name: Red-Teaming-Toolkit
+    url: https://github.com/infosecn1nja/Red-Teaming-Toolkit
+    repo: https://github.com/infosecn1nja/Red-Teaming-Toolkit
+    category: awesome
+    level: L3
+    cost: free
+    platform: any
+    team: red
+    clone: true
+    note: Open source red team tools grouped by kill-chain phase.
+  - name: awesome-cybersecurity-blueteam
+    url: https://github.com/fabacab/awesome-cybersecurity-blueteam
+    repo: https://github.com/fabacab/awesome-cybersecurity-blueteam
+    category: awesome
+    level: L1
+    cost: free
+    platform: any
+    team: blue
+    clone: true
+    note: Blue team tools, frameworks and training.
+  - name: awesome-incident-response
+    url: https://github.com/meirwah/awesome-incident-response
+    repo: https://github.com/meirwah/awesome-incident-response
+    category: awesome
+    level: L2
+    cost: free
+    platform: any
+    team: blue
+    clone: true
+    note: IR and DFIR tooling list.
+  - name: awesome-threat-detection
+    url: https://github.com/0x4D31/awesome-threat-detection
+    repo: https://github.com/0x4D31/awesome-threat-detection
+    category: awesome
+    level: L3
+    cost: free
+    platform: any
+    team: blue
+    clone: true
+    note: Threat hunting and detection engineering resources.
+  - name: awesome-osint
+    url: https://github.com/jivoi/awesome-osint
+    repo: https://github.com/jivoi/awesome-osint
+    category: awesome
+    level: L2
+    cost: free
+    platform: any
+    team: red
+    clone: true
+    note: OSINT tools and sources.
+  - name: awesome-malware-analysis
+    url: https://github.com/rshipp/awesome-malware-analysis
+    repo: https://github.com/rshipp/awesome-malware-analysis
+    category: awesome
+    level: L3
+    cost: free
+    platform: any
+    team: blue
+    clone: true
+    note: Malware analysis tools, sandboxes, books.
+  - name: Awesome-Hacking
+    url: https://github.com/Hack-with-Github/Awesome-Hacking
+    repo: https://github.com/Hack-with-Github/Awesome-Hacking
+    category: awesome
+    level: L1
+    cost: free
+    platform: any
+    team: both
+    clone: true
+    note: List of awesome lists across security sub-fields.
+  - name: awesome-ctf
+    url: https://github.com/apsdehal/awesome-ctf
+    repo: https://github.com/apsdehal/awesome-ctf
+    category: awesome
+    level: L1
+    cost: free
+    platform: any
+    team: red
+    clone: true
+    note: CTF frameworks, tools and practice sites.
+
+  # -------------------------------------------------------------- online-labs
+  - name: OverTheWire wargames
+    url: https://overthewire.org/wargames/
+    category: online-labs
+    level: L0
+    cost: free
+    platform: linux
+    team: red
+    clone: false
+    note: Start with Bandit for Linux CLI, then Natas (web) and Leviathan/Narnia.
+  - name: picoCTF
+    url: https://picoctf.org/
+    category: online-labs
+    level: L0
+    cost: free
+    platform: any
+    team: red
+    clone: false
+    note: Beginner-friendly CTF practice gym across web, crypto, forensics, pwn, RE.
+  - name: pwn.college
+    url: https://pwn.college/
+    category: online-labs
+    level: L1
+    cost: free
+    platform: linux
+    team: red
+    clone: false
+    note: Free university-grade dojos from Linux basics to kernel exploitation.
+  - name: PortSwigger Web Security Academy
+    url: https://portswigger.net/web-security
+    category: online-labs
+    level: L1
+    cost: free
+    platform: web
+    team: red
+    clone: false
+    note: The best free web hacking course + hundreds of labs (incl. LLM attack labs).
+  - name: CryptoHack
+    url: https://cryptohack.org/
+    category: online-labs
+    level: L1
+    cost: free
+    platform: any
+    team: red
+    clone: false
+    note: Learn applied cryptography by breaking it.
+  - name: Cryptopals
+    url: https://cryptopals.com/
+    category: online-labs
+    level: L2
+    cost: free
+    platform: any
+    team: red
+    clone: false
+    note: Classic crypto attack challenge sets.
+  - name: Exploit Education
+    url: https://exploit.education/
+    category: online-labs
+    level: L3
+    cost: free
+    platform: linux
+    team: red
+    clone: false
+    note: Downloadable VMs (Phoenix, Nebula, Fusion) for memory corruption and privesc.
+  - name: ROP Emporium
+    url: https://ropemporium.com/
+    category: online-labs
+    level: L4
+    cost: free
+    platform: linux
+    team: red
+    clone: false
+    note: Return-oriented programming challenges, one concept at a time.
+  - name: flAWS
+    url: http://flaws.cloud/
+    category: online-labs
+    level: L2
+    cost: free
+    platform: cloud
+    team: red
+    clone: false
+    note: AWS misconfiguration levels; flaws2.cloud adds an attacker and defender path.
+  - name: flAWS 2
+    url: http://flaws2.cloud/
+    category: online-labs
+    level: L3
+    cost: free
+    platform: cloud
+    team: both
+    clone: false
+    note: AWS attacker path plus a defender path using CloudTrail logs.
+  - name: Malware-Traffic-Analysis.net exercises
+    url: https://www.malware-traffic-analysis.net/training-exercises.html
+    category: online-labs
+    level: L2
+    cost: free
+    platform: any
+    team: blue
+    clone: false
+    note: PCAP investigation exercises with answers; perfect Wireshark/Zeek practice.
+  - name: TryHackMe (free rooms)
+    url: https://tryhackme.com/
+    category: online-labs
+    level: L0
+    cost: freemium
+    platform: both
+    team: both
+    clone: false
+    note: Many free guided rooms; paid tier adds more machines. Filter by "free".
+  - name: Hack The Box (free tier)
+    url: https://www.hackthebox.com/
+    category: online-labs
+    level: L2
+    cost: freemium
+    platform: both
+    team: red
+    clone: false
+    note: Free active machines and Starting Point; retired boxes need VIP.
+  - name: Blue Team Labs Online (free challenges)
+    url: https://blueteamlabs.online/
+    category: online-labs
+    level: L2
+    cost: freemium
+    platform: both
+    team: blue
+    clone: false
+    note: Free blue team challenges (forensics, log analysis, phishing).
+  - name: CyberDefenders (free labs)
+    url: https://cyberdefenders.org/
+    category: online-labs
+    level: L2
+    cost: freemium
+    platform: both
+    team: blue
+    clone: false
+    note: DFIR / SOC labs; many downloadable for free.
+  - name: LetsDefend (free tier)
+    url: https://letsdefend.io/
+    category: online-labs
+    level: L1
+    cost: freemium
+    platform: both
+    team: blue
+    clone: false
+    note: Simulated SOC alert queue; a free tier covers the basics.
+  - name: Microcorruption
+    url: https://microcorruption.com/
+    category: online-labs
+    level: L3
+    cost: free
+    platform: any
+    team: red
+    clone: false
+    note: Embedded (MSP430) exploitation CTF in the browser.
+
+  # --------------------------------------------------------- self-hosted-labs
+  - name: GOAD - Game Of Active Directory
+    url: https://orange-cyberdefense.github.io/GOAD/
+    repo: https://github.com/Orange-Cyberdefense/GOAD
+    category: self-hosted-labs
+    level: L3
+    cost: self-hosted
+    platform: windows
+    team: both
+    clone: false
+    note: Multi-domain vulnerable AD lab (VirtualBox/VMware/Proxmox); the core Windows lab here.
+  - name: Vulhub
+    url: https://vulhub.org/
+    repo: https://github.com/vulhub/vulhub
+    category: self-hosted-labs
+    level: L2
+    cost: self-hosted
+    platform: linux
+    team: both
+    clone: false
+    note: Docker Compose environments for hundreds of real CVEs (Log4Shell, Struts2, ...).
+  - name: DVWA
+    url: https://github.com/digininja/DVWA
+    repo: https://github.com/digininja/DVWA
+    category: self-hosted-labs
+    level: L1
+    cost: self-hosted
+    platform: web
+    team: red
+    clone: false
+    note: Damn Vulnerable Web Application - classic first web target.
+  - name: OWASP Juice Shop
+    url: https://owasp.org/projects/juice-shop
+    repo: https://github.com/juice-shop/juice-shop
+    category: self-hosted-labs
+    level: L1
+    cost: self-hosted
+    platform: web
+    team: red
+    clone: false
+    note: Modern vulnerable web shop with 100+ challenges and a free companion book.
+  - name: OWASP WebGoat
+    url: https://owasp.org/projects/webgoat
+    repo: https://github.com/WebGoat/WebGoat
+    category: self-hosted-labs
+    level: L1
+    cost: self-hosted
+    platform: web
+    team: red
+    clone: false
+    note: Lesson-based vulnerable Java app.
+  - name: Metasploitable 3
+    url: https://github.com/rapid7/metasploitable3
+    repo: https://github.com/rapid7/metasploitable3
+    category: self-hosted-labs
+    level: L2
+    cost: self-hosted
+    platform: both
+    team: red
+    clone: false
+    note: Vulnerable Windows and Linux VMs built with Vagrant.
+  - name: VulnHub
+    url: https://www.vulnhub.com/
+    category: self-hosted-labs
+    level: L2
+    cost: self-hosted
+    platform: both
+    team: red
+    clone: false
+    note: Downloadable boot-to-root VMs (archive; still a big free library).
+  - name: CloudGoat
+    url: https://github.com/RhinoSecurityLabs/cloudgoat
+    repo: https://github.com/RhinoSecurityLabs/cloudgoat
+    category: self-hosted-labs
+    level: L3
+    cost: self-hosted
+    platform: cloud
+    team: red
+    clone: false
+    note: Vulnerable-by-design AWS scenarios (deploys into your own AWS account - watch costs).
+  - name: Kubernetes Goat
+    url: https://madhuakula.com/kubernetes-goat/
+    repo: https://github.com/madhuakula/kubernetes-goat
+    category: self-hosted-labs
+    level: L3
+    cost: self-hosted
+    platform: cloud
+    team: both
+    clone: false
+    note: Interactive vulnerable Kubernetes cluster scenarios (runs on kind/minikube).
+  - name: Splunk Attack Range
+    url: https://github.com/splunk/attack_range
+    repo: https://github.com/splunk/attack_range
+    category: self-hosted-labs
+    level: L4
+    cost: self-hosted
+    platform: both
+    team: purple
+    clone: false
+    note: Builds a small lab, runs attack simulations and collects the logs for detection dev.
+  - name: DetectionLab (archived)
+    url: https://github.com/clong/DetectionLab
+    repo: https://github.com/clong/DetectionLab
+    category: self-hosted-labs
+    level: L3
+    cost: self-hosted
+    platform: windows
+    team: blue
+    clone: false
+    note: Archived, no longer maintained - read its design for a logging-first AD lab.
+  - name: Ludus
+    url: https://docs.ludus.cloud/
+    category: self-hosted-labs
+    level: L3
+    cost: self-hosted
+    platform: both
+    team: both
+    clone: false
+    note: Proxmox-based lab automation; can deploy GOAD and other ranges.
+
+  # ------------------------------------------------------------- blue-tooling
+  - name: Wazuh
+    url: https://wazuh.com/
+    repo: https://github.com/wazuh/wazuh
+    category: blue-tooling
+    level: L2
+    cost: self-hosted
+    platform: both
+    team: blue
+    clone: false
+    note: Open source SIEM/XDR - agents for Linux and Windows, FIM, rules. Home-lab SIEM pick.
+  - name: Security Onion
+    url: https://securityonionsolutions.com/software
+    repo: https://github.com/Security-Onion-Solutions/securityonion
+    category: blue-tooling
+    level: L3
+    cost: self-hosted
+    platform: linux
+    team: blue
+    clone: false
+    note: NSM + SIEM distro (Zeek, Suricata, Elastic) for network-centric monitoring.
+  - name: Elastic Stack
+    url: https://www.elastic.co/docs
+    category: blue-tooling
+    level: L2
+    cost: self-hosted
+    platform: any
+    team: blue
+    clone: false
+    note: Elasticsearch + Kibana; free self-managed tier includes the detection engine.
+  - name: Splunk Free
+    url: https://www.splunk.com/en_us/download/splunk-enterprise.html
+    category: blue-tooling
+    level: L2
+    cost: freemium
+    platform: any
+    team: blue
+    clone: false
+    note: Splunk Enterprise trial converts to Free (500 MB/day); needed for BOTS datasets.
+  - name: Velociraptor
+    url: https://docs.velociraptor.app/
+    repo: https://github.com/Velocidex/velociraptor
+    category: blue-tooling
+    level: L3
+    cost: self-hosted
+    platform: both
+    team: blue
+    clone: false
+    note: Endpoint visibility and DFIR collection at scale (VQL).
+  - name: Zeek
+    url: https://zeek.org/
+    repo: https://github.com/zeek/zeek
+    category: blue-tooling
+    level: L3
+    cost: self-hosted
+    platform: linux
+    team: blue
+    clone: false
+    note: Network security monitor that turns traffic into rich logs.
+  - name: Suricata
+    url: https://suricata.io/
+    repo: https://github.com/OISF/suricata
+    category: blue-tooling
+    level: L2
+    cost: self-hosted
+    platform: linux
+    team: blue
+    clone: false
+    note: IDS/IPS with signature rules and protocol logging.
+  - name: Wireshark
+    url: https://www.wireshark.org/
+    category: blue-tooling
+    level: L0
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Packet analysis; learn it early.
+  - name: Sysmon
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
+    category: blue-tooling
+    level: L2
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Rich Windows process / network / file telemetry (also Sysmon for Linux).
+  - name: sysmon-modular
+    url: https://github.com/olafhartong/sysmon-modular
+    repo: https://github.com/olafhartong/sysmon-modular
+    category: blue-tooling
+    level: L2
+    cost: free
+    platform: windows
+    team: blue
+    clone: true
+    note: ATT&CK-mapped modular Sysmon configuration.
+  - name: SwiftOnSecurity sysmon-config
+    url: https://github.com/SwiftOnSecurity/sysmon-config
+    repo: https://github.com/SwiftOnSecurity/sysmon-config
+    category: blue-tooling
+    level: L2
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Well-commented starter Sysmon config.
+  - name: Volatility 3
+    url: https://volatilityfoundation.org/
+    repo: https://github.com/volatilityfoundation/volatility3
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: any
+    team: blue
+    clone: false
+    note: Memory forensics framework for Windows, Linux and macOS images.
+  - name: Eric Zimmerman's tools
+    url: https://ericzimmerman.github.io/
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Windows forensic artifact parsers (MFT, registry, prefetch, event logs).
+  - name: Chainsaw
+    url: https://github.com/WithSecureOpenSource/chainsaw
+    repo: https://github.com/WithSecureOpenSource/chainsaw
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Fast hunting over EVTX with Sigma rules.
+  - name: Hayabusa
+    url: https://github.com/Yamato-Security/hayabusa
+    repo: https://github.com/Yamato-Security/hayabusa
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Windows event log fast forensics timeline generator using Sigma.
+  - name: Atomic Red Team
+    url: https://www.atomicredteam.io/
+    repo: https://github.com/redcanaryco/atomic-red-team
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: both
+    team: purple
+    clone: true
+    note: Small ATT&CK-mapped tests to validate detections.
+  - name: MITRE Caldera
+    url: https://caldera.mitre.org/
+    repo: https://github.com/apache/caldera
+    category: blue-tooling
+    level: L4
+    cost: self-hosted
+    platform: both
+    team: purple
+    clone: false
+    note: Automated adversary emulation platform.
+  - name: REMnux
+    url: https://remnux.org/
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: linux
+    team: blue
+    clone: false
+    note: Linux toolkit distro for malware analysis.
+  - name: FLARE-VM
+    url: https://github.com/mandiant/flare-vm
+    repo: https://github.com/mandiant/flare-vm
+    category: blue-tooling
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Windows malware analysis VM installer.
+  - name: Kali Linux
+    url: https://www.kali.org/
+    category: blue-tooling
+    level: L1
+    cost: free
+    platform: linux
+    team: red
+    clone: false
+    note: The attacker VM for the home lab (tools pre-installed).
+  - name: Lynis
+    url: https://cisofy.com/lynis/
+    repo: https://github.com/CISOfy/lynis
+    category: blue-tooling
+    level: L1
+    cost: free
+    platform: linux
+    team: blue
+    clone: false
+    note: Linux security audit and hardening scanner.
+
+  # ----------------------------------------------------------------- datasets
+  - name: SigmaHQ rules
+    url: https://sigmahq.io/
+    repo: https://github.com/SigmaHQ/sigma
+    category: datasets
+    level: L3
+    cost: free
+    platform: both
+    team: blue
+    clone: true
+    note: Generic detection rule format and the biggest open rule library.
+  - name: OTRF Security-Datasets
+    url: https://securitydatasets.com/
+    repo: https://github.com/OTRF/Security-Datasets
+    category: datasets
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Recorded attack telemetry (Windows/Linux/cloud) for hunting practice.
+  - name: EVTX-ATTACK-SAMPLES
+    url: https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES
+    repo: https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES
+    category: datasets
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Windows event logs of attack techniques, organised by ATT&CK tactic.
+  - name: Splunk BOTS v3 dataset
+    url: https://github.com/splunk/botsv3
+    repo: https://github.com/splunk/botsv3
+    category: datasets
+    level: L3
+    cost: free
+    platform: both
+    team: blue
+    clone: false
+    note: Boss of the SOC data + questions (v1 and v2 also published by Splunk).
+  - name: Elastic detection rules
+    url: https://github.com/elastic/detection-rules
+    repo: https://github.com/elastic/detection-rules
+    category: datasets
+    level: L3
+    cost: free
+    platform: both
+    team: blue
+    clone: false
+    note: Production detection rules with ATT&CK mappings; great to learn rule writing from.
+  - name: LOLDrivers
+    url: https://www.loldrivers.io/
+    category: datasets
+    level: L4
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Known vulnerable / malicious Windows drivers with detections.
+
+  # --------------------------------------------------------------- re-exploit
+  - name: Ghidra
+    url: https://github.com/NationalSecurityAgency/ghidra
+    repo: https://github.com/NationalSecurityAgency/ghidra
+    category: re-exploit
+    level: L3
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Free reverse-engineering suite with a decompiler.
+  - name: Nightmare
+    url: https://guyinatuxedo.github.io/
+    repo: https://github.com/guyinatuxedo/nightmare
+    category: re-exploit
+    level: L3
+    cost: free
+    platform: linux
+    team: red
+    clone: true
+    note: Binary exploitation course built from CTF challenges.
+  - name: how2heap
+    url: https://github.com/shellphish/how2heap
+    repo: https://github.com/shellphish/how2heap
+    category: re-exploit
+    level: L4
+    cost: free
+    platform: linux
+    team: red
+    clone: true
+    note: Educational glibc heap exploitation techniques.
+  - name: Practical Malware Analysis labs
+    url: https://github.com/mikesiko/PracticalMalwareAnalysis-Labs
+    repo: https://github.com/mikesiko/PracticalMalwareAnalysis-Labs
+    category: re-exploit
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Lab binaries for the book (real malware - only inside an isolated analysis VM).
+  - name: Beginners' Malware Analysis (MalwareUnicorn workshops)
+    url: https://malwareunicorn.org/#/workshops
+    category: re-exploit
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Free RE101/RE102 workshops.
+
+  # ----------------------------------------------------------------------- ai
+  - name: Neural Networks - Zero to Hero (Karpathy)
+    url: https://karpathy.ai/zero-to-hero.html
+    category: ai
+    level: L1
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Build neural nets and a GPT from scratch; the best way to learn how LLMs work.
+  - name: Hugging Face Learn (LLM, Agents courses)
+    url: https://huggingface.co/learn
+    category: ai
+    level: L1
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Free courses on transformers, LLMs, agents and MCP.
+  - name: fast.ai Practical Deep Learning
+    url: https://course.fast.ai/
+    category: ai
+    level: L1
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Top-down practical deep learning course.
+  - name: Anthropic courses
+    url: https://github.com/anthropics/courses
+    repo: https://github.com/anthropics/courses
+    category: ai
+    level: L1
+    cost: free
+    platform: any
+    team: ai
+    clone: true
+    note: API fundamentals, prompt engineering, tool use courses (notebooks).
+  - name: Anthropic prompt engineering tutorial
+    url: https://github.com/anthropics/prompt-eng-interactive-tutorial
+    repo: https://github.com/anthropics/prompt-eng-interactive-tutorial
+    category: ai
+    level: L1
+    cost: free
+    platform: any
+    team: ai
+    clone: true
+    note: Interactive step-by-step prompting tutorial.
+  - name: Model Context Protocol
+    url: https://modelcontextprotocol.io/
+    category: ai
+    level: L2
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Spec and guides for connecting models to tools and data.
+  - name: MCP reference servers
+    url: https://github.com/modelcontextprotocol/servers
+    repo: https://github.com/modelcontextprotocol/servers
+    category: ai
+    level: L2
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Example MCP servers to read and run in the AI lab.
+  - name: OWASP GenAI Security Project (LLM Top 10)
+    url: https://genai.owasp.org/
+    category: ai
+    level: L2
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Top 10 risks for LLM apps and agentic AI, with mitigations.
+  - name: MITRE ATLAS
+    url: https://atlas.mitre.org/
+    category: ai
+    level: L3
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: ATT&CK-style knowledge base of attacks on AI systems, with case studies.
+  - name: NIST AI Risk Management Framework
+    url: https://www.nist.gov/itl/ai-risk-management-framework
+    category: ai
+    level: L3
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Governance framework for managing AI risk in an organisation.
+  - name: garak
+    url: https://github.com/NVIDIA/garak
+    repo: https://github.com/NVIDIA/garak
+    category: ai
+    level: L3
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: LLM vulnerability scanner (prompt injection, jailbreaks, leakage probes).
+  - name: PyRIT
+    url: https://github.com/Azure/PyRIT
+    repo: https://github.com/Azure/PyRIT
+    category: ai
+    level: L4
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Microsoft's Python Risk Identification Toolkit for red-teaming generative AI.
+  - name: promptfoo
+    url: https://www.promptfoo.dev/
+    repo: https://github.com/promptfoo/promptfoo
+    category: ai
+    level: L2
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Evals and red-team test runner for prompts, RAG and agents.
+  - name: NeMo Guardrails
+    url: https://github.com/NVIDIA-NeMo/Guardrails
+    repo: https://github.com/NVIDIA-NeMo/Guardrails
+    category: ai
+    level: L3
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Programmable input/output rails for LLM apps.
+  - name: LLM Guard
+    url: https://github.com/protectai/llm-guard
+    repo: https://github.com/protectai/llm-guard
+    category: ai
+    level: L3
+    cost: free
+    platform: any
+    team: ai
+    clone: false
+    note: Scanners for prompt injection, PII and secrets in LLM input/output.
+  - name: LiteLLM proxy
+    url: https://docs.litellm.ai/
+    repo: https://github.com/BerriAI/litellm
+    category: ai
+    level: L2
+    cost: self-hosted
+    platform: any
+    team: ai
+    clone: false
+    note: AI gateway - virtual keys, per-user budgets, rate limits, model allow-lists, logging.
+  - name: Ollama
+    url: https://ollama.com/
+    repo: https://github.com/ollama/ollama
+    category: ai
+    level: L1
+    cost: self-hosted
+    platform: any
+    team: ai
+    clone: false
+    note: Run open-weight models locally; the base of the AI lab.
+  - name: Open WebUI
+    url: https://docs.openwebui.com/
+    repo: https://github.com/open-webui/open-webui
+    category: ai
+    level: L2
+    cost: self-hosted
+    platform: any
+    team: ai
+    clone: false
+    note: Self-hosted chat UI with users, groups and per-model access control.
+  - name: Lakera Gandalf / Agent Breaker
+    url: https://play.lakera.ai/
+    category: ai
+    level: L1
+    cost: free
+    platform: web
+    team: ai
+    clone: false
+    note: Prompt-injection games (gandalf.lakera.ai now redirects here); JS-only page, check access in a browser.
+  - name: Damn Vulnerable LLM Agent
+    url: https://github.com/ReversecLabs/damn-vulnerable-llm-agent
+    repo: https://github.com/ReversecLabs/damn-vulnerable-llm-agent
+    category: ai
+    level: L3
+    cost: self-hosted
+    platform: any
+    team: ai
+    clone: false
+    note: Deliberately vulnerable ReAct agent for practising indirect prompt injection.
+  - name: PortSwigger - Web LLM attacks
+    url: https://portswigger.net/web-security/llm-attacks
+    category: ai
+    level: L2
+    cost: free
+    platform: web
+    team: ai
+    clone: false
+    note: Free labs on LLM API abuse and indirect prompt injection.
+
+  # ------------------------------------------------------------- case-sources
+  - name: CISA Known Exploited Vulnerabilities catalog
+    url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+    category: case-sources
+    level: L2
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: CVEs confirmed exploited in the wild - the first place to look for new cases.
+  - name: NVD
+    url: https://nvd.nist.gov/
+    category: case-sources
+    level: L1
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: CVE details, CVSS scores, references.
+  - name: Project Zero - 0-days in the wild
+    url: https://googleprojectzero.github.io/0days-in-the-wild/
+    category: case-sources
+    level: L4
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Root-cause analyses of exploited zero-days.
+  - name: The DFIR Report
+    url: https://thedfirreport.com/
+    category: case-sources
+    level: L3
+    cost: free
+    platform: windows
+    team: blue
+    clone: false
+    note: Detailed intrusion write-ups with timelines, ATT&CK mapping and detections.
+  - name: MITRE ATT&CK - Campaigns
+    url: https://attack.mitre.org/campaigns/
+    category: case-sources
+    level: L3
+    cost: free
+    platform: any
+    team: both
+    clone: false
+    note: Documented real-world campaigns mapped to techniques.

@@ -1,0 +1,75 @@
+site_name: Cyber Cookbook
+site_description: Red + blue team study cookbook for Linux and Windows, beginner to expert, with free labs.
+site_url: https://premdon009.github.io/cyber-cookbook/
+repo_url: https://github.com/premdon009/cyber-cookbook
+repo_name: premdon009/cyber-cookbook
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  icon:
+    logo: material/shield-lock
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle: { icon: material/weather-night, name: Dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep orange
+      toggle: { icon: material/weather-sunny, name: Light mode }
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.edit
+
+plugins:
+  - search
+  - awesome-nav
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+# MkDocs excludes /note-templates/ by default; our note templates are real pages.
+exclude_docs: |
+  .*
